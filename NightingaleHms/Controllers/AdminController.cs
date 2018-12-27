@@ -68,6 +68,7 @@ namespace NightingaleHms.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult SaveDoctor(Doctor doctor)
         {
             //If Validation Fails
@@ -122,6 +123,7 @@ namespace NightingaleHms.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult SaveDepartment(Department department)
         {
             //If Validation Fails
@@ -180,6 +182,7 @@ namespace NightingaleHms.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult SavePlan(Plan plan)
         {
             //If Validation Fails
@@ -237,6 +240,7 @@ namespace NightingaleHms.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult SaveState(State state)
         {
             //If Validation Fails

@@ -77,6 +77,7 @@ namespace NightingaleHms.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult SavePatient(Patient patient)
         {
             //if validation fails

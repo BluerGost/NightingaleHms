@@ -68,6 +68,7 @@ namespace NightingaleHms.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult SaveDiagnosis(Diagnosis diagnosis)
         {
             //when form validation fails
@@ -139,7 +140,9 @@ namespace NightingaleHms.Controllers
 
             return View("BillForm", billViewModel);
         }
+
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult SaveBill(Bill bill)
         {
             //when form validation fails
