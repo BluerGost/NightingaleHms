@@ -1,0 +1,42 @@
+﻿@model IEnumerable<NightingaleHms.Models.Patient>
+@{
+    ViewBag.Title = "All Patients";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>All Users</h2>
+@if (!Model.Any())
+{
+    <p>There is no user Yet.</p>
+}
+else
+{
+    <table class="table table-bordered table-hover">
+        <tr>
+            <th>Full Name</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Age</th>
+            <th>Sex</th>
+            <th>Blood Type</th>
+            <th>Edit</th>
+        </tr>
+        @foreach (var patient in Model)
+        {
+            <tr>
+                @{
+                    string fullName = patient.FirstName + " " + patient.LastName;
+                }
+
+                <td>@fullName</td>
+                <td>@patient.Phone</td>
+                <td>@(patient.Email == null ? "None" : patient.Email)</td>
+                <td>@patient.Age</td>
+                <td>@patient.Sex.Name</td>
+                <td>@(patient.BloodType == null ? "None" : patient.BloodType.Name)</td>
+                <td>@Html.ActionLink("Edit", "EditPatient", "Receptionist", new { patientId = patient.PatientId }, new { @class = "btn btn-primary" })</td>
+            </tr>
+        }
+    </table>
+
+}

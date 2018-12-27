@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>AllPlans</h2>
+<h2>All Plans</h2>
 
 
 @if (!Model.Any())
@@ -16,11 +16,13 @@ else
     <table class="table table-bordered table-hover">
         <tr>
             <th>Name</th>
+            <th>Edit</th>
         </tr>
         @foreach (var plan in Model)
         {
             <tr>
-                <td>@Html.ActionLink(plan.Name, "EditPlan", "Admin", new { planId = plan.PlanId }, null)</td>
+                <td>@plan.Name</td>
+                <td>@Html.ActionLink("Edit", "EditPlan", "Admin", new { planId = plan.PlanId }, new { @class="btn btn-primary"})</td>
             </tr>
         }
     </table>

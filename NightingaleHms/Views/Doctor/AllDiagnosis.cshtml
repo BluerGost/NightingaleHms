@@ -1,0 +1,43 @@
+﻿@model  IEnumerable<NightingaleHms.Models.Diagnosis>
+
+@{
+    ViewBag.Title = "AllDiagnosis";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>All Diagnosis</h2>
+
+@if (!Model.Any())
+{
+    <p>There is no Diagnosis yet.</p>
+}
+else
+{
+    <table class="table table-bordered table-hover">
+        <tr>
+            <th>Patient</th>
+            <th>Doctor</th>
+            <th>Symptoms</th>
+            <th>Diagnosis Provided</th>
+            <th>Diagnosis Date</th>
+            <th>FollowUp Date</th>
+            <th>Bill Amount</th>
+            <th>Edit</th>
+
+        </tr>
+        @foreach (var diagnosis in Model)
+        {
+            <tr>
+                <td>@diagnosis.Patient.FirstName</td>
+                <td>@diagnosis.Doctor.FirstName</td>
+                <td>@diagnosis.Symptoms</td>
+                <td>@diagnosis.DiagnosisProvided</td>
+                <td>@diagnosis.DateOfDiagnosis.ToShortDateString()</td>
+                <td>@(@diagnosis.IsFollowUpRequired ? @diagnosis.DateOfFollowUp.Value.ToShortDateString() : "None")</td>
+                <td>@(@diagnosis.Bill==null ? "None": @diagnosis.Bill.Amount.ToString() )</td>
+                <td>@Html.ActionLink("Edit","EditDiagnosis","Doctor",new {diagnosisId = @diagnosis.DiagnosisId},new {@class="btn btn-primary"})</td>
+            </tr>
+         }
+    </table>
+
+}

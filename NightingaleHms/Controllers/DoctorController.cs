@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
 using NightingaleHms.Models;
 using NightingaleHms.ViewModel;
 
@@ -28,6 +29,18 @@ namespace NightingaleHms.Controllers
             throw new NotImplementedException();
             //return View();
         }
+
+        public ActionResult AllDiagnosis()
+        {
+            var diagnosis = _context.Diagnoses
+                .Include(d => d.Patient)
+                .Include(d => d.Doctor)
+                .Include(d=>d.Bill)
+                .ToList().OrderBy(d=>d.DateOfDiagnosis);
+
+            return View("AllDiagnosis",diagnosis);
+        }
+
         public ActionResult CreateDiagnosis()
         {         
             var viewModel = new DiagnosisFormViewModel()
@@ -36,6 +49,22 @@ namespace NightingaleHms.Controllers
                 Doctors = _context.Doctors.ToList()
             };
             return View("DiagnosisForm",viewModel);
+        }
+        public ActionResult EditDiagnosis(int diagnosisId)
+        {
+            var diagnosis = _context.Diagnoses.SingleOrDefault(d => d.DiagnosisId == diagnosisId);
+
+            if (diagnosis == null)
+                return HttpNotFound();
+
+            //initialize diagnosis data into the diagnosis form ViewModel.
+            var viewModel = new DiagnosisFormViewModel(diagnosis)
+            {
+                Patients = _context.Patients.ToList(),
+                Doctors = _context.Doctors.ToList()
+            };
+
+            return View("DiagnosisForm", viewModel);
         }
 
         [HttpPost]
@@ -78,24 +107,38 @@ namespace NightingaleHms.Controllers
             //getting billId
             int billId = diagnosis.DiagnosisId;
 
+            //check if the bill exits in the database.
+            var bill = _context.Bills.SingleOrDefault(b => b.BillId == billId);
 
-            //redirecting to CreateBill Action with the BillFormViewModel.
-            return RedirectToAction("CreateBill", new {billId});
+            if(bill==null)//new bill
+                return RedirectToAction("CreateBill", new { billId });
+            else//old bill(edit)
+                return RedirectToAction("EditBill", new { billId });
         }
 
-        public ActionResult CreateBill(int? billId)
+        public ActionResult CreateBill(int billId)
         {
-            //billId doesn't exist(forcefully used This CreateBill link).
-            if (billId == null || billId <= 0)
+            //billId cant exist(forcefully used This CreateBill link).
+            if (billId<=0)
                 return HttpNotFound();
 
-            var billViewModel = new BillFormViewModel()
-            {
-                BillId = billId//DiagnosisId is the FK and PK in the Bills table(Column name is BillId).
-            };
+            var billViewModel = new BillFormViewModel(billId);
+
             return View("BillForm",billViewModel);
         }
 
+        public ActionResult EditBill(int billId)
+        {
+            var bill = _context.Bills.SingleOrDefault(b => b.BillId == billId);
+
+            if (bill == null)
+                return HttpNotFound();
+
+            var billViewModel = new BillFormViewModel(bill);
+
+
+            return View("BillForm", billViewModel);
+        }
         [HttpPost]
         public ActionResult SaveBill(Bill bill)
         {

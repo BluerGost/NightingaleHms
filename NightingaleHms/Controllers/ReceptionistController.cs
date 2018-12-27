@@ -31,7 +31,7 @@ namespace NightingaleHms.Controllers
             
         }
 
-        public ActionResult AllUsers()
+        public ActionResult AllPatients()
         {
             var patient = _context.Patients
                 .Include(p => p.Sex)
@@ -42,7 +42,7 @@ namespace NightingaleHms.Controllers
             return View(patient);
         }
 
-        public ActionResult AddPatient()
+        public ActionResult CreatePatient()
         {
             var viewModel = new PatientFormViewModel()
             {
@@ -51,12 +51,12 @@ namespace NightingaleHms.Controllers
                 BloodTypes = _context.BloodTypes.ToList(),
                 Sexes = _context.Sexes.ToList()
             };
-            return View(viewModel);
+            return View("PatientForm",viewModel);
         }
 
-        public ActionResult Edit(int id)
+        public ActionResult EditPatient(int patientId)
         {
-            var patient = _context.Patients.SingleOrDefault(p => p.PatientId == id);
+            var patient = _context.Patients.SingleOrDefault(p => p.PatientId == patientId);
 
             //if patient is not found in the database.
             if (patient==null)
@@ -73,11 +73,11 @@ namespace NightingaleHms.Controllers
                 Sexes = _context.Sexes.ToList()
             };
 
-            return View("AddPatient", viewModel);
+            return View("PatientForm", viewModel);
         }
 
         [HttpPost]
-        public ActionResult Save(Patient patient)
+        public ActionResult SavePatient(Patient patient)
         {
             //if validation fails
             if (!ModelState.IsValid)
@@ -90,7 +90,7 @@ namespace NightingaleHms.Controllers
                     Sexes = _context.Sexes.ToList()
                 };
 
-                return View("AddPatient", viewModel);
+                return View("PatientForm", viewModel);
             }
 
 
@@ -117,7 +117,7 @@ namespace NightingaleHms.Controllers
             //save the changes into the database.
             _context.SaveChanges();
 
-            return RedirectToAction("Index", "Receptionist");
+            return RedirectToAction("AllPatients", "Receptionist");
         }
     }
 }

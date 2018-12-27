@@ -34,9 +34,9 @@ namespace NightingaleHms.ViewModel
 
         public Diagnosis Diagnosis { get; set; }
 
-        public BillFormViewModel()
+        public BillFormViewModel(int billId)
         {
-            BillId = 0;
+            BillId = billId;
         }
 
         public BillFormViewModel(Bill bill)

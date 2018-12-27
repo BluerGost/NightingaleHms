@@ -17,6 +17,7 @@ else
             <th>Department</th>
             <th>Plan</th>
             <th>State</th>
+            <th>Edit</th>
         </tr>
         @foreach (var user in Model)
         {
@@ -25,10 +26,11 @@ else
                     string fullName = @user.FirstName + " " + @user.LastName; 
                 }
 
-                <td>@Html.ActionLink(fullName, "EditDoctor", "Admin", new {doctorId = user.DoctorId}, null)</td>
+                <td>@fullName</td>
                 <td>@(@user.Department == null ? "None" : @user.Department.Name)</td>
                 <td>@(@user.Plan == null ? "None" : @user.Plan.Name)</td>
                 <td>@(@user.State == null ? "None" : @user.State.Name)</td>
+                <td>@Html.ActionLink("Edit", "EditDoctor", "Admin", new { doctorId = user.DoctorId }, new { @class = "btn btn-primary" })</td>
             </tr>
         }
     </table>

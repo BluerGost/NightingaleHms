@@ -18,7 +18,11 @@ The database schema has been redesigned to inprove some of the parts the previou
 3. C# (Programming Language)
 4. ASP.NET MVC 5
 5. Entity Framework(Code First)
-6. [Lucidchart](lucidchart.com) For Creating ERD.
+6. [Lucidchart](https://www.lucidchart.com/) For Creating ERD.
+
+## Roadmap
+
+* [NightingaleHms Trello Link](https://trello.com/b/zxOhgtn8).
 
 ## Acknowledgments
 

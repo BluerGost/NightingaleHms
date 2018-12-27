@@ -17,12 +17,14 @@ else
         <tr>
             <th>Name</th>
             <th>Description</th>
+            <th>Edit</th>
         </tr>
         @foreach (var department in Model)
         {
             <tr>
                 <td>@Html.ActionLink(department.Name, "EditDepartment", "Admin", new { departmentId = department.DepartmentId}, null)</td>
                 <td>@(@department.Description == null ? "None" : @department.Description)</td>
+                <td>@Html.ActionLink("Edit", "EditDepartment", "Admin", new { departmentId = department.DepartmentId}, new { @class="btn btn-primary"})</td>
             </tr>
         }
     </table>

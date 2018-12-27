@@ -16,11 +16,13 @@ else
     <table class="table table-bordered table-hover">
         <tr>
             <th>Name</th>
+            <th>Edit</th>
         </tr>
         @foreach (var state in Model)
         {
             <tr>
-                <td>@Html.ActionLink(state.Name, "EditState", "Admin", new { stateId = state.StateId }, null)</td>
+                <td>@state.Name</td>
+                <td>@Html.ActionLink("Edit", "EditState", "Admin", new { stateId = state.StateId }, new {@class="btn btn-primary"})</td>
             </tr>
         }
     </table>

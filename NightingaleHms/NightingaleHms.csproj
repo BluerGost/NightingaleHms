@@ -345,8 +345,8 @@
     <Content Include="Views\Admin\DoctorForm.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\AllDoctors.cshtml" />
-    <Content Include="Views\Receptionist\AddPatient.cshtml" />
-    <Content Include="Views\Receptionist\AllUsers.cshtml" />
+    <Content Include="Views\Receptionist\PatientForm.cshtml" />
+    <Content Include="Views\Receptionist\AllPatients.cshtml" />
     <Content Include="Views\Shared\_NavBar.cshtml" />
     <Content Include="Views\Doctor\DiagnosisForm.cshtml" />
     <Content Include="Views\Doctor\BillForm.cshtml" />
@@ -356,6 +356,7 @@
     <Content Include="Views\Admin\AllPlans.cshtml" />
     <Content Include="Views\Admin\StateForm.cshtml" />
     <Content Include="Views\Admin\AllStates.cshtml" />
+    <Content Include="Views\Doctor\AllDiagnosis.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

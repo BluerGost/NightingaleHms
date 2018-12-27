@@ -47,8 +47,8 @@ namespace NightingaleHms.ViewModel
         [Required]
         public int? DoctorId { get; set; }
 
-        [Required]
-        public int? BillId { get; set; }
+        //bill object. for using include in the view.
+        public Bill Bill { get; set; }
 
         public DiagnosisFormViewModel()
         {
@@ -68,8 +68,6 @@ namespace NightingaleHms.ViewModel
             //Navigation Property(FK)
             PatientId = diagnosis.PatientId;
             DoctorId = diagnosis.DoctorId;
-            //BillId = diagnosis.Bill;
-
         }
     }
 }
