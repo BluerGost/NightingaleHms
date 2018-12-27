@@ -1,0 +1,64 @@
+﻿@model NightingaleHms.ViewModel.DiagnosisFormViewModel
+@{
+    ViewBag.Title = "Create Diagnosis";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create Diagnosis</h2>
+
+@using (@Html.BeginForm("SaveDiagnosis", "Doctor"))
+{
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.PatientId)
+        @Html.DropDownListFor(m => m.PatientId, new SelectList(Model.Patients, "PatientId", "FirstName"), "Select Patient", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.PatientId)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.DoctorId)
+        @Html.DropDownListFor(m => m.DoctorId, new SelectList(Model.Doctors, "DoctorId", "FirstName"), "Select Doctor", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.DoctorId)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Symptoms)
+        @Html.TextBoxFor(m => m.Symptoms, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Symptoms)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.DiagnosisProvided)
+        @Html.TextAreaFor(m=>m.DiagnosisProvided, new { rows="5", @class= "form-control" })
+        @*@Html.TextBoxFor(m => m.DiagnosisProvided, new { @class = "form-control" })*@
+        @Html.ValidationMessageFor(m => m.DiagnosisProvided)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.DateOfDiagnosis)
+        @Html.TextBoxFor(m => m.DateOfDiagnosis, "{0:d MMM yyyy}", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.DateOfDiagnosis)
+    </div>
+
+    <div class="checkbox">
+        <label>
+            @Html.CheckBoxFor(m=>m.IsFollowUpRequired) Is FollowUp diagnosis required?
+        </label>
+    </div>
+
+    <hr/>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.DateOfFollowUp)
+        @Html.TextBoxFor(m => m.DateOfFollowUp, "{0:d MMM yyyy}", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.DateOfFollowUp)
+    </div>
+
+ 
+
+    @Html.HiddenFor(m => m.DiagnosisId)
+
+    <button type="submit" class="btn btn-primary">Save</button>
+}
+
+

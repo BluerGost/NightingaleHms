@@ -1,0 +1,30 @@
+﻿@model  NightingaleHms.Models.Department
+@{
+    ViewBag.Title = "Department Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create Department</h2>
+
+@using (@Html.BeginForm("SaveDepartment", "Admin"))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name)
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Name)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Description)
+        @Html.TextBoxFor(m => m.Description, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Description)
+    </div>
+
+   
+
+    @Html.HiddenFor(m => m.DepartmentId)
+
+    <button type="submit" class="btn btn-primary">Save</button>
+}
+
+

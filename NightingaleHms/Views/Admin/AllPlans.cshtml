@@ -1,0 +1,29 @@
+﻿@model IEnumerable<NightingaleHms.Models.Plan>
+@{
+    ViewBag.Title = "AllPlans";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>AllPlans</h2>
+
+
+@if (!Model.Any())
+{
+    <p>There is no Plans Yet.</p>
+}
+else
+{
+    <table class="table table-bordered table-hover">
+        <tr>
+            <th>Name</th>
+        </tr>
+        @foreach (var plan in Model)
+        {
+            <tr>
+                <td>@Html.ActionLink(plan.Name, "EditPlan", "Admin", new { planId = plan.PlanId }, null)</td>
+            </tr>
+        }
+    </table>
+}
+
+

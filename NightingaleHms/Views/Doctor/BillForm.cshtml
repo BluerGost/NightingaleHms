@@ -1,0 +1,39 @@
+﻿@model NightingaleHms.ViewModel.BillFormViewModel
+@{
+    ViewBag.Title = "Create Bill";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create Bill</h2>
+
+
+@using (@Html.BeginForm("SaveBill", "Doctor"))
+{
+
+    
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Amount)
+        @Html.TextBoxFor(m => m.Amount, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Amount)
+    </div>
+
+    <div class="checkbox">
+        <label>
+            @Html.CheckBoxFor(m => m.IsCardPayment) Are you paying with Card?(Check if Yes)
+        </label>
+    </div>
+
+    <hr />
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.CardNumber)
+        @Html.TextBoxFor(m => m.CardNumber, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.CardNumber)
+    </div>
+
+
+    @Html.HiddenFor(m => m.BillId)
+
+    <button type="submit" class="btn btn-primary">Save</button>
+}

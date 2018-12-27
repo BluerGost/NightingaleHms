@@ -1,0 +1,37 @@
+﻿@model IEnumerable<NightingaleHms.Models.Doctor>
+@{
+    ViewBag.Title = "All Doctors";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>All Doctors</h2>
+@if (!Model.Any())
+{
+    <p>There is no user Yet.</p>
+}
+else
+{
+    <table class="table table-bordered table-hover">
+        <tr>
+            <th>Full Name</th>
+            <th>Department</th>
+            <th>Plan</th>
+            <th>State</th>
+        </tr>
+        @foreach (var user in Model)
+        {
+            <tr>
+                @{
+                    string fullName = @user.FirstName + " " + @user.LastName; 
+                }
+
+                <td>@Html.ActionLink(fullName, "EditDoctor", "Admin", new {doctorId = user.DoctorId}, null)</td>
+                <td>@(@user.Department == null ? "None" : @user.Department.Name)</td>
+                <td>@(@user.Plan == null ? "None" : @user.Plan.Name)</td>
+                <td>@(@user.State == null ? "None" : @user.State.Name)</td>
+            </tr>
+        }
+    </table>
+}
+
+

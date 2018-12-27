@@ -1,0 +1,69 @@
+﻿@model NightingaleHms.ViewModel.PatientFormViewModel
+
+@{
+    ViewBag.Title = "Add Patient";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.Title Patient</h2>
+
+@using (@Html.BeginForm("Save", "Receptionist"))
+{
+    @Html.ValidationSummary()
+    <div class="form-group">
+        @Html.LabelFor(m => m.FirstName)
+        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.FirstName)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.LastName)
+        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.LastName)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Phone)
+        @Html.TextBoxFor(m => m.Phone, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Phone)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Age)
+        @Html.TextBoxFor(m => m.Age, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Age)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.SexId)
+        @Html.DropDownListFor(m => m.SexId, new SelectList(Model.Sexes, "SexId", "Name"), "Select Department", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.SexId)
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Email)
+        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Email)
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.BloodTypeId)
+        @Html.DropDownListFor(m => m.BloodTypeId, new SelectList(Model.BloodTypes, "BloodTypeId", "Name"), "Select Blood Type", new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.PlanId)
+        @Html.DropDownListFor(m => m.PlanId, new SelectList(Model.Plans, "PlanId", "Name"), "Select Plan", new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.StateId)
+        @Html.DropDownListFor(m => m.StateId, new SelectList(Model.States, "StateId", "Name"), "Select State", new { @class = "form-control" })
+    </div>
+
+    @Html.HiddenFor(m => m.PatientId)
+
+    <button type="submit" class="btn btn-primary">Save</button>
+}

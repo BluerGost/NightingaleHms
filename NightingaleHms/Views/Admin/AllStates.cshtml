@@ -1,0 +1,28 @@
+﻿@model IEnumerable<NightingaleHms.Models.State>
+@{
+    ViewBag.Title = "All States";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>All States</h2>
+
+
+@if (!Model.Any())
+{
+    <p>There is no States Yet.</p>
+}
+else
+{
+    <table class="table table-bordered table-hover">
+        <tr>
+            <th>Name</th>
+        </tr>
+        @foreach (var state in Model)
+        {
+            <tr>
+                <td>@Html.ActionLink(state.Name, "EditState", "Admin", new { stateId = state.StateId }, null)</td>
+            </tr>
+        }
+    </table>
+}
+

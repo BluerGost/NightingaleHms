@@ -1,0 +1,48 @@
+﻿@model NightingaleHms.ViewModel.DoctorFormViewModel
+@{
+    ViewBag.Title = "AddDoctor";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Add Doctor</h2>
+
+@using (@Html.BeginForm("SaveDoctor", "Admin"))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.FirstName)
+        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.FirstName)
+    </div>   
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.LastName)
+        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.LastName)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.YearOfExperience)
+        @Html.TextBoxFor(m => m.YearOfExperience, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.YearOfExperience)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.DepartmentId)
+        @Html.DropDownListFor(m => m.DepartmentId,new SelectList(Model.Departments, "DepartmentId", "Name"),"Select Department",new { @class  = "form-control"})
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.PlanId)
+        @Html.DropDownListFor(m => m.PlanId, new SelectList(Model.Plans, "PlanId", "Name"), "Select Department", new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.StateId)
+        @Html.DropDownListFor(m => m.StateId, new SelectList(Model.States, "StateId", "Name"), "Select Department", new { @class = "form-control" })
+    </div>
+
+    @Html.HiddenFor(m => m.DoctorId)
+
+    <button type="submit" class="btn btn-primary">Save</button>
+}
+
